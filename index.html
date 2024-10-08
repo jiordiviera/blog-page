@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Blog Posts</title>
+</head>
+<body>
+    <h1>Derniers Articles de Blog</h1>
+    <div id="posts"></div>
+
+    <script>
+        fetch('https://portfolio.jd-devs.com/api/posts')
+            .then(response => response.json())
+            .then(data => {
+                const postsContainer = document.getElementById('posts');
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.innerHTML = `<h2><a href="https://portfolio.jd-devs.com/post/${post.slug}">${post.title}</a></h2>`;
+                    postsContainer.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    </script>
+</body>
+</html>
